@@ -23,7 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text(
-            "Kedame Gebya App",
+            "Kedame Gebya",
             style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
           ),
           actions: [

@@ -27,23 +27,17 @@ class _ProfilePageState extends State<ProfilePage> {
     initMobileNumberState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initMobileNumberState() async {
     if (!await MobileNumber.hasPhonePermission) {
       await MobileNumber.requestPhonePermission;
       return;
     }
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       _mobileNumber = (await MobileNumber.mobileNumber)!;
       _simCard = (await MobileNumber.getSimCards)!;
     } on PlatformException catch (e) {
       debugPrint("Failed to get mobile number because of '${e.message}'");
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {});
@@ -65,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text(
-            "Kedame Gebya App",
+            "Kedame Gebya",
             style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
           ),
           actions: [
@@ -132,26 +126,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
-              // Card(
-              //   color: Colors.white,
-              //   margin: EdgeInsets.symmetric(
-              //     vertical: 10,
-              //     horizontal: 25,
-              //   ),
-              //   child: ListTile(
-              //       leading: Icon(
-              //         Icons.phone,
-              //         color: Color.fromARGB(255, 0, 0, 0),
-              //       ),
-              //       title: Text(
-              //         '+251928983855',
-              //         style: TextStyle(
-              //             fontFamily: 'Sacramento',
-              //             fontSize: 20,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color.fromARGB(255, 0, 0, 0)),
-              //       )),
-              // ),
               const Card(
                 color: Color.fromARGB(255, 249, 249, 249),
                 margin: EdgeInsets.symmetric(
@@ -166,10 +140,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: Text(
                     'amanuelademe2@gmail.com',
                     style: TextStyle(
-                        fontFamily: 'Sacramento',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                      fontFamily: 'Sacramento',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
                   ),
                 ),
               ),

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
-          "Kedame Gebya App",
+          "Kedame Gebya",
           style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
         ),
         actions: [
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   BlocProvider.of<KedameGebyaBloc>(context)
                       .add(const KedameGebyaEvent());
                 },
-                icon: const Icon(Icons.shopping_basket_rounded),
+                icon: const Icon(Icons.add_shopping_cart_rounded),
                 label: const Text("Kedame Gebya App"),
               ),
             );
