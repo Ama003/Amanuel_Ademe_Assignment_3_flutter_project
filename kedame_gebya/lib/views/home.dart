@@ -5,7 +5,6 @@ import 'package:kedame_gebya/bloc/kedame_gebya_event.dart';
 import 'package:kedame_gebya/bloc/kedame_gebya_state.dart';
 
 import '../routes.dart';
-import 'components/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Colors.amber,
         title: const Text(
           "Kedame Gebya",
           style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
@@ -55,7 +54,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: MyDrawer(),
       body: BlocBuilder<KedameGebyaBloc, KedameGebyaState>(
         builder: (context, state) {
           if (state is KedameGebyaInitialState) {

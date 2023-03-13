@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:kedame_gebya/routes.dart';
 import 'package:mobile_number/mobile_number.dart';
 
-import 'components/my_drawer.dart';
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -55,9 +53,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.amber,
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.amber,
           title: const Text(
             "Kedame Gebya",
             style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
@@ -92,7 +90,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-        drawer: MyDrawer(),
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -6,7 +6,6 @@ import 'package:kedame_gebya/bloc/kedame_gebya_state.dart';
 import 'package:kedame_gebya/routes.dart';
 
 import '../bloc/kedame_gebya_bloc.dart';
-import 'components/my_drawer.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -21,7 +20,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.amber,
           title: const Text(
             "Kedame Gebya",
             style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
@@ -56,7 +55,6 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
           ],
         ),
-        drawer: MyDrawer(),
         body: BlocBuilder<KedameGebyaBloc, KedameGebyaState>(
           builder: (context, state) {
             if (state is KedameGebyaInitialState) {
