@@ -57,20 +57,8 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder<KedameGebyaBloc, KedameGebyaState>(
         builder: (context, state) {
           if (state is KedameGebyaInitialState) {
-            return Center(
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(200, 50),
-                    alignment: Alignment.center,
-                    elevation: 0),
-                onPressed: () {
-                  BlocProvider.of<KedameGebyaBloc>(context)
-                      .add(const KedameGebyaEvent());
-                },
-                icon: const Icon(Icons.add_shopping_cart_rounded),
-                label: const Text("Kedame Gebya App"),
-              ),
-            );
+            BlocProvider.of<KedameGebyaBloc>(context)
+                .add(const AsbezaFetchEvent());
           }
           if (state is KedameGebyaLoadingState) {
             return const Center(

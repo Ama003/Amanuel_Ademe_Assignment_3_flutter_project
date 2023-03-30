@@ -7,12 +7,13 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePage> createState() => _ProfileState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfileState extends State<ProfilePage> {
   String _mobileNumber = '';
   List<SimCard> _simCard = <SimCard>[];
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     } on PlatformException catch (e) {
       debugPrint("Failed to get mobile number because of '${e.message}'");
     }
+
     if (!mounted) return;
 
     setState(() {});
@@ -51,78 +53,87 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      appBar: AppBar(
         backgroundColor: Colors.amber,
-        appBar: AppBar(
-          backgroundColor: Colors.amber,
-          title: const Text(
-            "Kedame Gebya",
-            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.history);
-              },
-              icon: const Icon(
-                Icons.shopping_bag,
-                color: Colors.black,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.profile);
-              },
-              icon: const Icon(
-                Icons.account_circle_rounded,
-                color: Colors.black,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.home);
-              },
-              icon: const Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-            ),
-          ],
+        title: const Text(
+          "Kedame Gebya",
+          style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
         ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CircleAvatar(
-                radius: 100,
-                backgroundImage: AssetImage('images/baby.jpg'),
-              ),
-              const Text(
-                'Boss baby',
-                style: TextStyle(
-                    fontFamily: 'Pacifico',
-                    fontSize: 30,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              const Text(
-                'FLUTTER DEVELOPER',
-                style: TextStyle(
-                  fontFamily: 'Sacramento',
-                  fontSize: 20,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.5,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.history);
+            },
+            icon: const Icon(
+              Icons.shopping_bag,
+              color: Colors.black,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.profile);
+            },
+            icon: const Icon(
+              Icons.account_circle_rounded,
+              color: Colors.black,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.home);
+            },
+            icon: const Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      body: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 350,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const <Widget>[
+                    CircleAvatar(
+                      radius: 100,
+                      backgroundImage: AssetImage('images/baby.jpg'),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 20.0,
-                width: 150,
-                child: Divider(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
+                const Text(
+                  'Boss baby',
+                  style: TextStyle(
+                      fontFamily: 'Pacifico',
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'FLUTTER DEVELOPER',
+                  style: TextStyle(
+                    fontFamily: 'Sacramento',
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: <Widget>[
               const Card(
                 color: Color.fromARGB(255, 249, 249, 249),
                 margin: EdgeInsets.symmetric(
@@ -145,11 +156,30 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Text('Running on: $_mobileNumber\n'),
-              fillCards()
+              Card(
+                color: const Color.fromARGB(255, 249, 249, 249),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 25,
+                ),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.phone,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  title: Text(
+                    '+$_mobileNumber',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }

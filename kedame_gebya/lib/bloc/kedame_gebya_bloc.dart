@@ -1,21 +1,44 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kedame_gebya/model/model.dart';
+import 'package:kedame_gebya/model/service.dart';
 import '../model/repository.dart';
 import 'kedame_gebya_state.dart';
 import 'kedame_gebya_event.dart';
 
 class KedameGebyaBloc extends Bloc<KedameGebyaEvent, KedameGebyaState> {
   final _apiServiceProvider = ApiServiceProvider();
+  final _service = Service();
+
   List history = [];
+  List historyLoaded = [];
+
   KedameGebyaBloc() : super(KedameGebyaInitialState()) {
-    on<KedameGebyaEvent>((event, emit) async {
+    on<AsbezaFetchEvent>((event, emit) async {
       emit(KedameGebyaLoadingState());
       try {
         final activity = await _apiServiceProvider.fetchActivity();
-        emit(KedameGebyaSuccessState(kedameGebya: activity!, history: history));
+        await _service.readKedameGebya().then((val) => {
+              history = val,
+              print(val),
+            });
+        historyLoaded = KedameGebya.historyList(history);
+        print(historyLoaded);
+        emit(KedameGebyaSuccessState(
+          kedameGebya: activity!,
+          history: historyLoaded,
+        ));
       } catch (e) {
-        emit(KedameGebyaInitialState());
+        emit(KedameGebyaFailed());
       }
     });
-    on<HistoryEvent>((event, emit) => {history.add(event.data)});
+
+    on<HistoryEvent>((event, emit) => {
+          if (!historyLoaded.contains(event.data))
+            {
+              // _service.wipeDate(),
+              historyLoaded.add(event.data),
+              _service.saveKedameGebya(event.data),
+            }
+        });
   }
 }

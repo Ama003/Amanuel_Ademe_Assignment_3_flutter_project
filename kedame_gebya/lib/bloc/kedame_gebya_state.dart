@@ -14,6 +14,10 @@ class KedameGebyaLoadingState extends KedameGebyaState {}
 class KedameGebyaSuccessState extends KedameGebyaState {
   final List kedameGebya;
   final List history;
-  const KedameGebyaSuccessState(
-      {required this.kedameGebya, required this.history});
+  const KedameGebyaSuccessState({
+    required this.kedameGebya,
+    required this.history,
+  });
 }
+
+class KedameGebyaFailed extends KedameGebyaState {}

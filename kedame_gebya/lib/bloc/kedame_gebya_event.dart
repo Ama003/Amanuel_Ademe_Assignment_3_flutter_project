@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../model/model.dart';
 
-class KedameGebyaEvent extends Equatable {
+abstract class KedameGebyaEvent extends Equatable {
   const KedameGebyaEvent();
 
   @override
