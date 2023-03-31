@@ -21,6 +21,7 @@ class KedameGebyaBloc extends Bloc<KedameGebyaEvent, KedameGebyaState> {
           await _service.readKedameGebya().then(
                 (val) => {
                   history = val,
+                  print(val),
                 },
               );
 
@@ -31,6 +32,7 @@ class KedameGebyaBloc extends Bloc<KedameGebyaEvent, KedameGebyaState> {
             history: historyLoaded,
           ));
         } catch (e) {
+          print(e);
           emit(KedameGebyaFailed());
         }
       },

@@ -22,7 +22,7 @@ class KedameGebya {
     return KedameGebya(
         id: parsedJson["id"],
         category: parsedJson["category"],
-        foodPrice: parsedJson["foodprice"],
+        foodPrice: parsedJson["foodPrice"],
         image: parsedJson["image"]);
   }
 
@@ -48,6 +48,7 @@ class KedameGebya {
     for (var i = 0; i < kedameGebya.length; i++) {
       kedameGebyas.add(KedameGebya.historyfromJson(kedameGebya[i]));
     }
+
     return kedameGebyas;
   }
 }
