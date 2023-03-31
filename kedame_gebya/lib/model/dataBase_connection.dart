@@ -15,6 +15,6 @@ class DatabaseConnection {
 
   _onCreatingDatabase(Database database, int version) async {
     await database.execute(
-        "CREATE TABLE kedameGebya(id INTEGER PRIMARY KEY,category TEXT,foodPrice INTEGER,image TEXT)");
+        "CREATE TABLE kedameGebya(id INTEGER PRIMARY KEY ,category TEXT,foodPrice INTEGER,image TEXT)");
   }
 }

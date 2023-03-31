@@ -22,7 +22,7 @@ class KedameGebya {
     return KedameGebya(
         id: parsedJson["id"],
         category: parsedJson["category"],
-        foodPrice: parsedJson["price"],
+        foodPrice: parsedJson["foodprice"],
         image: parsedJson["image"]);
   }
 

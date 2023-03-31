@@ -13,32 +13,38 @@ class KedameGebyaBloc extends Bloc<KedameGebyaEvent, KedameGebyaState> {
   List historyLoaded = [];
 
   KedameGebyaBloc() : super(KedameGebyaInitialState()) {
-    on<AsbezaFetchEvent>((event, emit) async {
-      emit(KedameGebyaLoadingState());
-      try {
-        final activity = await _apiServiceProvider.fetchActivity();
-        await _service.readKedameGebya().then((val) => {
-              history = val,
-              print(val),
-            });
-        historyLoaded = KedameGebya.historyList(history);
-        print(historyLoaded);
-        emit(KedameGebyaSuccessState(
-          kedameGebya: activity!,
-          history: historyLoaded,
-        ));
-      } catch (e) {
-        emit(KedameGebyaFailed());
-      }
-    });
+    on<AsbezaFetchEvent>(
+      (event, emit) async {
+        emit(KedameGebyaLoadingState());
+        try {
+          final activity = await _apiServiceProvider.fetchActivity();
+          await _service.readKedameGebya().then(
+                (val) => {
+                  history = val,
+                },
+              );
 
-    on<HistoryEvent>((event, emit) => {
-          if (!historyLoaded.contains(event.data))
-            {
-              // _service.wipeDate(),
-              historyLoaded.add(event.data),
-              _service.saveKedameGebya(event.data),
-            }
-        });
+          historyLoaded = KedameGebya.historyList(history);
+
+          emit(KedameGebyaSuccessState(
+            kedameGebya: activity!,
+            history: historyLoaded,
+          ));
+        } catch (e) {
+          emit(KedameGebyaFailed());
+        }
+      },
+    );
+
+    on<HistoryEvent>(
+      (event, emit) => {
+        if (!historyLoaded.contains(event.data))
+          {
+            // _service.wipeDate(),
+            historyLoaded.add(event.data),
+            _service.saveKedameGebya(event.data),
+          }
+      },
+    );
   }
 }
